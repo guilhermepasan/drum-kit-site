@@ -1,17 +1,19 @@
-
-// Check button press:
+// Check button press by adding click event listener to each button:
 for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
     document.querySelectorAll(".drum")[i].addEventListener("click", function () {
         var buttonInnerHtml = this.innerHTML;
         makeSound(buttonInnerHtml);
+        buttonAnimation(buttonInnerHtml);
     });
 }
 
-// Check key press:
+// Check key press on the whole website:
 document.addEventListener("keydown", function (event) {
     makeSound(event.key);
+    buttonAnimation(event.key);
 });
 
+// Sound output:
 function makeSound(key) {
     switch (key) {
         case "w":
@@ -52,4 +54,11 @@ function makeSound(key) {
         default:
             break;
     }
+}
+
+// Animate button on key press:
+function buttonAnimation(currentKey) {
+    var activeButton = document.querySelector("."+currentKey);
+    activeButton.classList.add("pressed");
+    setTimeout(function(){activeButton.classList.remove("pressed");}, 100);
 }
